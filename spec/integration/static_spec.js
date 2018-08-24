@@ -13,4 +13,15 @@ describe("routes : static", () => {
 
   }); // end of describe("GET /")
 
+  describe("GET /marco", () => {
+    it("should return status code 200 and 'polo'", (done) => {
+      request.get("http://localhost:3000/marco", (err, res, body) => {
+        expect(res.statusCode).toBe(200);
+        expect(body).toBe("polo");
+        done();
+      });
+    }); //end of it
+
+  });//end of describe("GET /marco")
+
 });
