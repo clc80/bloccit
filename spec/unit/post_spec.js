@@ -21,7 +21,7 @@ describe("Post", () => {
       })
       .then((post) => {
         this.post = post;
-        done;
+        done();
       });
       })
       .catch((err) => {
@@ -63,4 +63,31 @@ describe("Post", () => {
       })
     }); //end it
   }); //end describe("#create()")
+
+  describe("#setTopic()", () => {
+    it("should associate a topic and a post together", (done) => {
+      Topic.create({
+        title: "Challenges of interstellar travel",
+        description: "1. The Wi-Fi is terrible"
+      })
+      .then((newTopic) => {
+        expect(this.post.topicId).toBe(this.topic.id);
+        this.post.setTopic(newTopic)
+        .then((post) => {
+          expect(post.topicId).toBe(newTopic.id);
+          done();
+        });
+      })
+    }); // en it
+  }); //end describe("#setTopic()")
+
+  describe("getTopic()", () => {
+    it("should return the associated topic", (done) => {
+      this.post.getTopic()
+      .then((associatedTopic) => {
+        expect(associatedTopic.title).toBe("Expeditions to Alpha Centauri");
+        done();
+      });
+    }); // end it
+  }); //end describe("getTopic()")
 }); //end describe("Post")
