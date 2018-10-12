@@ -14,7 +14,7 @@ module.exports = {
   }, //end getAllTopics(callback)
 
   getTopic(id, callback) {
-    return Topic.findById(id)
+    //return Topic.findById(id)
     return Topic.findById(id, {
       include: [{
         model: Post,
