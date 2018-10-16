@@ -14,7 +14,7 @@ module.exports = {
       if(err){
         res.redirect(500, "/posts/new");
       } else {
-        res.redirect(303, `topics/${newPost.topicId}/posts/${post.id}`);
+        res.redirect(303, `${post.id}`);
       }
     }); //end postQueries.addPost
   }, //end create
@@ -35,5 +35,23 @@ module.exports = {
         res.redirect(303, `/topics/${req.params.topicId}`)
       }
     });
-  } //end destroy
+  }, //end destroy
+  edit(req, res, next) {
+    postQueries.getPost(req.params.id, (err, post) => {
+      if(err || post == null) {
+        res.redirect(404, "/");
+      } else {
+        res.render("posts/edit", {post});
+      }
+    });
+  }, //end edit
+  update(req, res, next) {
+    postQueries.updatePost(req.params.id, req.body, (err, post) => {
+      if(err || post == null) {
+        res.redirect(404, `/topics/${req.params.topicId}/posts/${req.params.id}/edit`);
+      } else {
+        res.redirect(`/topics/${req.params.topicId}/posts/${req.params.id}`);
+      }
+    });
+  } //end Update
 }
