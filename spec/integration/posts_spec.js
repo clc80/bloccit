@@ -22,10 +22,14 @@ describe("routes : posts", () => {
 
         Post.create({
           title: "Snowball Fighting",
-          body: "So much snow!", topicId: this.topic.id}).then((post) => {
+          body: "So much snow!",
+          topicId: this.topic.id
+        })
+        .then((post) => {
           this.post = post;
           done();
-        }).catch((err) => {
+        })
+        .catch((err) => {
           console.log(err);
           done();
         });
@@ -88,7 +92,7 @@ describe("routes : posts", () => {
 
  describe("POST /topics/:topicId/posts/:id/destroy", () => {
    it("should delete the post with the associated ID", (done) => {
-     expect(post.id).toBe(1);
+     expect(this.post.id).toBe(1);
      request.post(`${base}/${this.topic.id}/posts/${this.post.id}/destroy`, (err, res, body) => {
        Post.findById(1)
        .then((post) => {
@@ -99,4 +103,52 @@ describe("routes : posts", () => {
      }); //end request
    }); //end it
  }); //end describe("POST /topics/:topicId/posts/:id/destroy")
+
+ describe("GET /topics/:topicId/posts/:id/edit", () =>  {
+   it ("should render a view with an edit post form", (done) => {
+     request.get(`${base}/${this.topic.id}/posts/${this.post.id}/edit`, (err, res, body) => {
+       expect(err).toBeNull();
+       expect(body).toContain("Edit Post");
+       expect(body).toContain("Snowball Fighting");
+       done();
+     }); //end request
+
+   }); //end it
+ }); //end describe("GET /topics/:topicId/posts/:id/edit")
+
+ describe("POST /topics/:topicId/posts/:id/update", () =>{
+   it("should return a status code 302", (done) => {
+     request.post({
+       url: `${base}/${this.topic.id}/posts/${this.post.id}/update`,
+       form: {
+         title: "Snowman Building Competition",
+         body: "I love watching them slowly."
+       }
+     }, (err, res, body) => {
+       expect(res.statusCode).toBe(302);
+       done();
+     }); //end request.post
+   }); //end it
+   it ("should update the post with the given values", (done) => {
+     const options = {
+       url: `${base}/${this.topic.id}/posts/${this.post.id}/update`,
+       form: {
+         title: "Snowman Building Competition"
+       }
+     };
+     request.post(options,
+       (err, res, body) => {
+         expect(err).toBeNull();
+
+         Post.findOne({
+           where: {id: this.post.id}
+         })
+         .then((post) => {
+           expect(post.title).toBe("Snowman Building Competition");
+           done();
+         });
+     });
+   }); //end it
+ }); //end describe("POST /topics/:topicId/posts/:id/update")
+
 }); // end describe("routes: posts")
