@@ -21,6 +21,10 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "topicId",
       onDelete: "CASCADE"
     });
+    Post.hasMany(models.Flair, {
+      foreignKey: "postId",
+      as: "flairs"
+    });
   };
   return Post;
 };
