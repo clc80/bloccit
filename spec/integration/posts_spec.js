@@ -77,8 +77,6 @@ describe("routes : posts", () => {
       ); //end request.post
     }); //end it
 
-    it("should not create a new post that fails validations", (done) => {/* spec implementation */});
-
      it("should not create a new post that fails validations", (done) => {
        const options = {
          url: `${base}/${this.topic.id}/posts/create`,
@@ -101,7 +99,7 @@ describe("routes : posts", () => {
            });
          }
        );
-     });
+     }); // end it
 
  }); //end describe("POST /topics/:topicId/posts/create")
 
@@ -159,7 +157,8 @@ describe("routes : posts", () => {
      const options = {
        url: `${base}/${this.topic.id}/posts/${this.post.id}/update`,
        form: {
-         title: "Snowman Building Competition"
+         title: "Snowman Building Competition",
+         body: "I love watching them slowly."
        }
      };
      request.post(options,
