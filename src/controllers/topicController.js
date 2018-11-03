@@ -26,7 +26,7 @@ module.exports = {
 
   create(req, res, next) {
     const authorized = new Authorizer(req.user).create();
-
+    console.log("Creating a topic. authorized = " + authorized);
     if(authorized) {
       let newTopic = {
         title: req.body.title,
