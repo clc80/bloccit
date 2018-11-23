@@ -158,7 +158,7 @@ describe("routes : topics", () => {
       });
     }) // end it
   }); //end describe("POST /topics/:id/update")
-});
+})
 
 
 

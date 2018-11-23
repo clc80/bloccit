@@ -38,7 +38,7 @@ describe("Topic", () => {
         done();
       })
     })
-    }); //end sequelize.sync
+  }); //end sequelize.sync
   }); //end before beforeEach
 
   describe("#create()", () => {

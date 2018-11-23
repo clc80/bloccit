@@ -18,7 +18,8 @@ describe("routes : posts", () => {
 
       User.create({
         email: "starman@tesla.com",
-        password: "Trekkie4lyfe"
+        password: "Trekkie4lyfe",
+        role: "admin"
       })
       .then((user) => {
         this.user = user;
@@ -32,15 +33,15 @@ describe("routes : posts", () => {
             userId: this.user.id
           }]
         }, {
-          inclue: {
+          include: {
             model: Post,
             as: "posts"
           }
         })
         .then((topic) => {
-        this.topic = topic;
-        this.post = topic.posts[0];
-        done();
+          this.topic = topic;
+          this.post = topic.posts[0];
+          done();
         })
       })
     }); //end sequelize.sync
