@@ -127,7 +127,7 @@ describe("Post", () => {
          expect(associatedUser.email).toBe("starman@tesla.com");
          done();
        });
-     }); // end it 
+     }); // end it
    }); // end describe("#getUser()"
 
 }); //end describe("Post")
