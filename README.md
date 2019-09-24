@@ -12,8 +12,6 @@
 * Bootstrap
 * JQuery
 
- This project also utilized Express-validator for validations, Passport.js for authentication, Morgan for route logging, Bcrypt.js for encryption, Jasmine for test-driven development, Faker to help seed the database and Heroku for deployment.
-
  Bloccit was completed as part of [Bloc's](https://www.bloc.io/) Web Development Curriculum.
 
 ### Available Scripts
